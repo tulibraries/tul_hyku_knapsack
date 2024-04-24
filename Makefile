@@ -6,7 +6,6 @@ IMAGE ?= tulibraries/tul-hyku
 VERSION ?= 1.0.0
 HARBOR ?= harbor.k8s.temple.edu
 HYKU ?= ghcr.io/samvera/hyku
-PLATFORM ?= linux/x86_64
 
 build: build-web build-worker
 
@@ -16,7 +15,6 @@ build-web:
 		--target hyku-web \
 		--tag $(HARBOR)/$(IMAGE)/web:$(VERSION) \
 		--tag $(HARBOR)/$(IMAGE)/web:latest \
-		--platform $(PLATFORM) \
 		--file Dockerfile \
 		--progress plain \
 		--no-cache .
@@ -27,7 +25,6 @@ build-worker:
 		--target hyku-worker \
 		--tag $(HARBOR)/$(IMAGE)/worker:$(VERSION) \
 		--tag $(HARBOR)/$(IMAGE)/worker:latest \
-		--platform $(PLATFORM) \
 		--file Dockerfile \
 		--progress plain \
 		--no-cache .
