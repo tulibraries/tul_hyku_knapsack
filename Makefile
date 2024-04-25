@@ -7,6 +7,17 @@ VERSION ?= 1.0.0
 HARBOR ?= harbor.k8s.temple.edu
 HYKU ?= ghcr.io/samvera/hyku
 
+build-hyku-base:
+	@docker tag harbor.k8s.temple.edu/tulibraries/hyrax-base:latest ghcr.io/samvera/hyrax/hyrax-base:latest
+	@pushd hyrax-webapp; docker build \
+		--build-arg HYRAX_IMAGE_VERSION=latest \
+		--target hyku-base \
+		--tag $(HARBOR)/$(IMAGE)/hyku-base:$(VERSION) \
+		--tag $(HARBOR)/$(IMAGE)/hyku-base:latest \
+		--platform $(PLATFORM) \
+		--progress plain \
+		--no-cache .; popd
+
 build: build-web build-worker
 
 build-web:
@@ -30,7 +41,21 @@ build-worker:
 		--no-cache .
 
 scan:
-	trivy image "$(HARBOR)/$(IMAGE)/web:$(VERSION)" --scanners vuln;
+	trivy image "$(HARBOR)/$(IMAGE)/hyku-base:$(VERSION)" --scanners vuln;
+
+shell-web:
+	@docker run --rm -it \
+		--entrypoint=sh --user=root \
+		$(HARBOR)/$(IMAGE)/hyku-base:$(VERSION)
+
+deploy-hyku-base:
+	@docker push $(HARBOR)/$(IMAGE)/hyku-base:$(VERSION) \
+		# This "if" statement needs to be a one liner or it will fail.
+		# Do not edit indentation
+		@if [ $(VERSION) != latest ]; \
+			then \
+				docker push $(HARBOR)/$(IMAGE)/hyku-base:latest; \
+			fi
 
 deploy: deploy-web deploy-worker
 
