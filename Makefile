@@ -2,9 +2,9 @@
 include .env
 export #exports the .env variables
 
-IMAGE ?= tulibraries/tul-hyku
+IMAGE ?= tul-hyku
 VERSION ?= 1.0.0
-HARBOR ?= harbor.k8s.temple.edu
+HARBOR ?= harbor.k8s.temple.edu/tulibraries
 HYKU ?= ghcr.io/samvera/hyku
 
 build-hyku-base:
@@ -12,11 +12,10 @@ build-hyku-base:
 	@pushd hyrax-webapp; docker build \
 		--build-arg HYRAX_IMAGE_VERSION=latest \
 		--target hyku-base \
-		--tag $(HARBOR)/$(IMAGE)/hyku-base:$(VERSION) \
-		--tag $(HARBOR)/$(IMAGE)/hyku-base:latest \
-		--platform $(PLATFORM) \
-		--progress plain \
-		--no-cache .; popd
+		--tag $(HARBOR)/hyku-base:$(VERSION) \
+		--tag $(HARBOR)/hyku-base:latest \
+		--tag hyku-base:latest \
+		--progress plain --no-cache . ; popd
 
 build: build-web build-worker
 
@@ -40,13 +39,23 @@ build-worker:
 		--progress plain \
 		--no-cache .
 
-scan:
-	trivy image "$(HARBOR)/$(IMAGE)/hyku-base:$(VERSION)" --scanners vuln;
+scan: skan-web skan-hyku-base
+
+scan-web:
+	trivy image "$(HARBOR)/$(IMAGE)/web:$(VERSION)" --scanners vuln;
+
+scan-hyku-base:
+	trivy image "$(HARBOR)/hyku-base:$(VERSION)" --scanners vuln;
+
+shell-base:
+	@docker run --rm -it \
+		--entrypoint=sh --user=root \
+		$(HARBOR)/hyku-base:$(VERSION)
 
 shell-web:
 	@docker run --rm -it \
 		--entrypoint=sh --user=root \
-		$(HARBOR)/$(IMAGE)/hyku-base:$(VERSION)
+		$(HARBOR)/$(IMAGE)/hyku-web:$(VERSION)
 
 deploy-hyku-base:
 	@docker push $(HARBOR)/$(IMAGE)/hyku-base:$(VERSION) \
