@@ -32,9 +32,9 @@ build-worker:
 scan:
 	trivy image "$(HARBOR)/$(IMAGE)/web:$(VERSION)" --scanners vuln;
 
-deploy: deploy-web deploy-worker
+upload: deploy-web deploy-worker
 
-deploy-web:
+upload-web:
 	@docker push $(HARBOR)/$(IMAGE)/web:$(VERSION) \
 	# This "if" statement needs to be a one liner or it will fail.
 	# Do not edit indentation
@@ -43,7 +43,7 @@ deploy-web:
 			docker push $(HARBOR)/$(IMAGE)/web:latest; \
 		fi
 
-deploy-worker:
+upload-worker:
 	@docker push $(HARBOR)/$(IMAGE)/worker:$(VERSION) \
 	# This "if" statement needs to be a one liner or it will fail.
 	# Do not edit indentation
