@@ -1,4 +1,3 @@
-version: '3.8'
 x-app: &app
   build:
     context: .
@@ -9,7 +8,7 @@ x-app: &app
     args:
       BUILDKIT_INLINE_CACHE: 1
       APP_PATH: ./hyrax-webapp
-  image: ghcr.io/samvera-labs/hyku_knapsack:${TAG:-latest}
+  image: harbor.k8s.temple.edu/tulibraries/tul-hyku/web:latest
   environment:
     # This line is what makes the knapsack include use the local code instead of the remote gem
     - BUNDLE_LOCAL__HYKU_KNAPSACK=/app/samvera
@@ -62,7 +61,7 @@ services:
     extends:
       file: hyrax-webapp/docker-compose.yml
       service: base
-    image: ghcr.io/samvera/hyku/base:${TAG:-latest}
+    image: harbor.k8s.temple.edu/tulibraries/tul-hyku/web:latest
     command: bash -l -c "echo 'base is only used for building base images, which in turn reduces image build times. It does not need to be run'"
 
   web:
@@ -93,7 +92,7 @@ services:
       args:
         BUILDKIT_INLINE_CACHE: 1
         APP_PATH: ./hyrax-webapp
-    image: ghcr.io/samvera-labs/hyku_knapsack/worker:${TAG:-latest}
+    image: harbor.k8s.temple.edu/tulibraries/tul-hyku/worker:latest
     # Uncomment command to access container with out starting bin/worker. Useful for debugging or updating Gemfile.lock
     # command: sleep infinity
     volumes:
