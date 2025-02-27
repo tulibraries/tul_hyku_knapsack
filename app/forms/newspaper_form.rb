@@ -5,7 +5,7 @@
 #
 # @see https://github.com/samvera/hyrax/wiki/Hyrax-Valkyrie-Usage-Guide#forms
 # @see https://github.com/samvera/valkyrie/wiki/ChangeSets-and-Dirty-Tracking
-class NewspaperForm < Hyrax::Forms::PcdmObjectForm(Newspaper)
+class NewspaperForm < Hyrax::Forms::ResourceForm(Newspaper)
   include Hyrax::FormFields(:basic_metadata)
   include Hyrax::FormFields(:newspaper)
 

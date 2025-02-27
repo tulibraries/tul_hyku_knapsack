@@ -14,6 +14,10 @@ class Newspaper < Hyrax::Work
     pdf_split_child_model: GenericWorkResource,
     pdf_splitter_service: IiifPrint::TenantConfig::PdfSplitter
   )
+  
+  def self.indexer
+    NewspaperIndexer
+  end
 
   prepend OrderAlready.for(:creator)
 end
