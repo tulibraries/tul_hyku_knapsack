@@ -21,4 +21,14 @@
 # Generated via
 #  `rails generate hyrax:work_resource Newspaper`
 
-attributes: {}
+attributes:
+  type:
+    type: string
+    multiple: true
+    index_keys:
+      - "type_sim"
+      - "type_tesim"    
+    form:
+      required: false
+      primary: false
+      multiple: true

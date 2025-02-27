@@ -2,7 +2,7 @@
 
 # Generated via
 #  `rails generate hyrax:work_resource Newspaper`
-class NewspaperIndexer < Hyrax::Indexers::PcdmObjectIndexer(Newspaper)
+class NewspaperIndexer < AppIndexer
   include Hyrax::Indexer(:basic_metadata)
   include Hyrax::Indexer(:newspaper)
 
