@@ -13,10 +13,13 @@ Rails.application.config.before_initialize do
 end
 
 Rails.application.config.after_initialize do
+  Hyrax.config do |config|
+  end
+
   # Ensure that valid_child_concerns are set with all the curation concerns including
   # the ones registered from the Knapsack
-  Hyrax.config.curation_concerns.each do |concern|
-    concern.valid_child_concerns = Hyrax.config.curation_concerns
-    "#{concern}Resource".safe_constantize&.valid_child_concerns = Hyrax.config.curation_concerns
-  end
+  #Hyrax.config.curation_concerns.each do |concern|
+    #concern.valid_child_concerns = Hyrax.config.curation_concerns
+    #"#{concern}Resource".safe_constantize&.valid_child_concerns = Hyrax.config.curation_concerns
+  #end
 end
