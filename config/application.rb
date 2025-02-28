@@ -233,6 +233,8 @@ module Hyku
     # Add the middleware directory to the eager load paths
     config.eager_load_paths << Rails.root.join('app', 'middleware')
 
+    config.active_support.deprecation = :silence
+
     ##
     #   @return [Array<String>] an array of strings in which we should be looking for theme view
     #           candidates.
