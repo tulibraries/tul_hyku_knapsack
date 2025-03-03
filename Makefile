@@ -3,7 +3,7 @@ include .env
 export #exports the .env variables
 
 IMAGE ?= tulibraries/tul-hyku
-VERSION ?= 1.1.0
+VERSION ?= 1.2.4
 HARBOR ?= harbor.k8s.temple.edu
 HYKU ?= ghcr.io/samvera/hyku
 
