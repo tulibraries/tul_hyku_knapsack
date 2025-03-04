@@ -53,7 +53,7 @@ attributes:
       multiple: false
   date_modified:
     type: date_time
-    multiple: true
+    multiple: false
     form:
       primary: false
     index_keys:
