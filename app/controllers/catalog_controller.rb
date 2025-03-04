@@ -123,17 +123,22 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_facet_field 'generic_type_sim', label: "Type", limit: 5
     config.add_facet_field 'type_sim', label: "Resource Type", limit: 5
-    config.add_facet_field 'resource_type_sim', label: "Resource Type", limit: 5
-    config.add_facet_field 'creator_sim', limit: 5
+    config.add_facet_field 'searchable_date_sim', label: "Searchable Date", limit: 5
+    # config.add_facet_field 'resource_type_sim', label: "Resource Type", limit: 5
+    config.add_facet_field 'creator_sim', label: "Created By" limit: 5
     config.add_facet_field 'contributor_sim', label: "Contributor", limit: 5
     config.add_facet_field 'keyword_sim', limit: 5
     config.add_facet_field 'subject_sim', limit: 5
     config.add_facet_field 'language_sim', limit: 5
     config.add_facet_field 'based_near_label_sim', limit: 5
     config.add_facet_field 'publisher_sim', limit: 5
-    config.add_facet_field 'file_format_sim', limit: 5
+    config.add_facet_field 'digital_publisher_sim', label: "Digital Publisher", limit: 5
+    config.add_facet_field 'format_sim', limit: 5
     config.add_facet_field 'contributing_library_sim', limit: 5
     config.add_facet_field 'member_of_collections_ssim', limit: 5, label: 'Collections'
+    config.add_facet_field 'digital_collection_sim', label: "Digital Collection", limit: 5
+  
+
 
 
     # TODO: deal with part of facet changes
@@ -179,7 +184,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'description_tesim', helper_method: :truncate_and_iconify_auto_link
     config.add_show_field 'keyword_tesim'
     config.add_show_field 'subject_tesim'
-    config.add_show_field 'creator_tesim'
+    config.add_show_field 'creator_tesim', label: "Created by"
     config.add_show_field 'contributor_tesim'
     config.add_show_field 'publisher_tesim'
     config.add_show_field 'based_near_label_tesim'
@@ -215,6 +220,41 @@ class CatalogController < ApplicationController
     config.add_show_field 'library_catalog_identifier_tesim'
     config.add_show_field 'chronology_note_tesim'
     config.add_show_field 'type_tesim'
+    config.add_show_field 'date_tesim'
+    config.add_show_field 'searchable_date_tesim', label: "Searchable date"
+    config.add_show_field 'volume_tesim'
+    config.add_show_field 'issue_tesim'
+    config.add_show_field 'format_tesim'
+    config.add_show_field 'repository_tesim'
+    config.add_show_field 'repository_collection_tesim', label: "Repository collection"
+    config.add_show_field 'local_rights_statement_tesim', label: "Local rights statement"
+    config.add_show_field 'standardized_rights_statement_tesim', label: "Standardized rights statement"
+    config.add_show_field 'digital_collection_tesim', label: "Digital collection"
+    config.add_show_field 'digital_publisher_tesim', label: "Digital publisher"
+    config.add_show_field 'digital_specifications_tesim', label: "Digital specifications"
+    config.add_show_field 'contact_tesim'
+    config.add_show_field 'ada_note_tesim', label: "ADA note"
+    config.add_show_field 'feedback_form_tesim', label: "Feedback form"
+    config.add_show_field 'date_modified_tesim', label: "Date modified"
+    config.add_show_field 'oclc_number_tesim', label: "OCLC number"
+    config.add_show_field 'contentdm_number_tesim', label: "ContentDM number"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
