@@ -9,7 +9,7 @@ module Hyrax
     include Hyrax::WorksControllerBehavior
     include Hyku::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
-    self.curation_concern_type = ::Newspaper
+    self.curation_concern_type = ::NewspaperResource
 
     # Use a Valkyrie aware form service to generate Valkyrie::ChangeSet style
     # forms.
