@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 # Generated via
-#  `rails generate hyrax:work_resource Newspaper`
+#  `rails generate hyrax:work_resource NewspaperResource`
 require 'rails_helper'
 require 'hyrax/specs/shared_specs/hydra_works'
 
-RSpec.describe Newspaper do
+RSpec.describe NewspaperResource do
   subject(:work) { described_class.new }
 
   it_behaves_like 'a Hyrax::Work'
