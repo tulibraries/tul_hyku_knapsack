@@ -4,7 +4,7 @@
 #  `rails generate hyrax:work_resource Newspaper`
 module Hyrax
   # Generated controller for Newspaper
-  class NewspapersController < ApplicationController
+  class NewspaperResourcesController < ApplicationController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
     include Hyku::WorksControllerBehavior
