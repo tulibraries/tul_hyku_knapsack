@@ -3,11 +3,11 @@ include .env
 export #exports the .env variables
 
 IMAGE ?= tulibraries/tul-hyku
-VERSION ?= 1.2.6
+VERSION ?= 1.3.0
 HARBOR ?= harbor.k8s.temple.edu
 HYKU ?= ghcr.io/samvera/hyku
 
-build: build-web build-worker
+build: build-clean-base build-web build-worker
 
 build-web:
 	@docker build \
@@ -28,6 +28,9 @@ build-worker:
 		--file Dockerfile \
 		--progress plain \
 		--no-cache .
+
+build-clean-base:
+		@docker build -f Dockerfile.base-clean -t hyku-base-no-onbuild .
 
 scan:
 	trivy image "$(HARBOR)/$(IMAGE)/web:$(VERSION)" --scanners vuln;
