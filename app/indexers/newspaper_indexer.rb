@@ -2,9 +2,9 @@
 
 # Generated via
 #  `rails generate hyrax:work_resource NewspaperResource`
-class NewspaperResourceIndexer < Hyrax::ValkyrieWorkIndexer
+class NewspaperIndexer < Hyrax::ValkyrieWorkIndexer
   include Hyrax::Indexer(:basic_metadata)
-  include Hyrax::Indexer(:newspaper_resource)
+  include Hyrax::Indexer(:newspaper)
   include Hyrax::Indexer(:bulkrax_metadata)
   include Hyrax::Indexer(:with_pdf_viewer)
   include Hyrax::Indexer(:with_video_embed)

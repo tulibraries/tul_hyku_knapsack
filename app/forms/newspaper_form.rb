@@ -5,9 +5,9 @@
 #
 # @see https://github.com/samvera/hyrax/wiki/Hyrax-Valkyrie-Usage-Guide#forms
 # @see https://github.com/samvera/valkyrie/wiki/ChangeSets-and-Dirty-Tracking
-class NewspaperResourceForm < Hyrax::Forms::ResourceForm(NewspaperResource)
+class NewspaperForm < Hyrax::Forms::ResourceForm(Newspaper)
   include Hyrax::FormFields(:basic_metadata)
-  include Hyrax::FormFields(:newspaper_resource)
+  include Hyrax::FormFields(:newspaper)
   include Hyrax::FormFields(:with_pdf_viewer)
   include Hyrax::FormFields(:with_video_embed)
   include Hyrax::FormFields(:bulkrax_metadata)

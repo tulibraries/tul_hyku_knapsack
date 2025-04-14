@@ -125,6 +125,13 @@ services:
       file: hyrax-webapp/docker-compose.yml
       service: redis
 
+  fits:
+    image: ghcr.io/samvera/fitsservlet:1.6.0
+    ports:
+      - 8080
+    networks:
+      internal:
+
   chrome:
     extends:
       file: hyrax-webapp/docker-compose.yml

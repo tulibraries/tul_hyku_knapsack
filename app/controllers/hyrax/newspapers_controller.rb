@@ -4,12 +4,12 @@
 #  `rails generate hyrax:work_resource Newspaper`
 module Hyrax
   # Generated controller for Newspaper
-  class NewspaperResourcesController < ApplicationController
+  class NewspapersController < ApplicationController
     # Adds Hyrax behaviors to the controller.
     include Hyrax::WorksControllerBehavior
     include Hyku::WorksControllerBehavior
     include Hyrax::BreadcrumbsForWorks
-    self.curation_concern_type = ::NewspaperResource
+    self.curation_concern_type = ::Newspaper
 
     # Use a Valkyrie aware form service to generate Valkyrie::ChangeSet style
     # forms.
