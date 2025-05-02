@@ -1,4 +1,4 @@
-FROM ruby:3.2-bookworm AS hyku-knap-base
+FROM ruby:3.2.2-bookworm AS hyku-knap-base
 
 USER root
 
@@ -66,6 +66,8 @@ RUN wget https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-57.t
     && cd $OLDPWD \
     && rm -rf ImageMagick*
 
+RUN apt-get update && apt-get install -y ghostscript
+
 # Install "best" training data for Tesseract
 RUN echo "📚 Installing Tesseract Best (training data)!" && \
     mkdir -p /usr/share/tessdata/ && \
@@ -87,7 +89,7 @@ COPY --chown=1001:101 /hyrax-webapp/Gemfile ./
 COPY --chown=1001:101 /hyrax-webapp/Gemfile.lock ./
 RUN git config --global --add safe.directory /app/samvera && \
     bundle install --jobs "$(nproc)"
-ENV PATH="/app/samvera/hyrax-webapp/bin:/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH="/usr/local/bundle/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin/:app/samvera/hyrax-webapp/bin"
 
 
 

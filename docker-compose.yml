@@ -115,10 +115,11 @@ services:
       service: initialize_app
     command:
       - >
-        solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
-        solrcloud-assign-configset.sh &&
-        SOLR_COLLECTION_NAME=hydra-test solrcloud-assign-configset.sh &&
-        db-migrate-seed.sh
+        bash /app/samvera/hyrax-webapp/bin/solrcloud-upload-configset.sh /app/samvera/hyrax-webapp/solr/conf &&
+        bash /app/samvera/hyrax-webapp/bin/solrcloud-assign-configset.sh &&
+        SOLR_COLLECTION_NAME=hydra-test bash /app/samvera/hyrax-webapp/bin/solrcloud-assign-configset.sh &&
+        bundle &&
+        ruby bin/db-migrate-seed.sh
 
   redis:
     extends:
