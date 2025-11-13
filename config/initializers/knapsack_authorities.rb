@@ -19,11 +19,17 @@ module Qa
       # Overidding to handle to return an array of paths
       def subauthorities_path(knapsack_authorities_path: HykuKnapsack::AUTHORITIES_PATH)
         # knapsack_authorities_path should be first to allow for overriding in case of duplicate names
-        authorities_paths = [knapsack_authorities_path, config[:local_path]]
+        authorities_paths = [
+          knapsack_authorities_path,
+          config[:local_path],
+          Rails.root.join('config', 'authorities')
+        ]
 
         authorities_paths.map do |path|
-          path if File.directory?(path)
-        end.compact
+          next unless path
+          path_string = path.to_s
+          path_string if File.directory?(path_string)
+        end.compact.uniq
       end
 
       # Overriding to handle an array of paths to return names of all files
